@@ -28,13 +28,9 @@ public class Install_info {
     @Column(name = "ID", updatable = false)
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id; }
 
     @Column(name = "INSTALL_NUMBER")
     public String getInstallNumber() {
