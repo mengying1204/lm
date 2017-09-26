@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/light_manage/light_manage.iml" filepath="$PROJECT_DIR$/light_manage/light_manage.iml" />
+      <module fileurl="file://D:\workplace\intellijWorkplace\lm\light_manage\light_manage.iml" filepath="D:\workplace\intellijWorkplace\lm\light_manage\light_manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/light_project.iml" filepath="$PROJECT_DIR$/.idea/light_project.iml" />
     </modules>
   </component>
