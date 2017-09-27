@@ -4,6 +4,7 @@ import com.bupt.common.base.BaseCommonController;
 import com.bupt.common.base.PageEntity;
 import com.bupt.common.utils.BeanUtills;
 import com.bupt.common.utils.DateUtil;
+import com.bupt.common.utils.NumberUtills;
 import com.bupt.domain.Install_info;
 import com.bupt.service.Install_infoService;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +25,8 @@ public class Install_infoController extends BaseCommonController {
 
     @RequestMapping(value = "",method = RequestMethod.POST)
     public String save(@RequestBody Install_info entity) {
+        String id = NumberUtills.getNumber();
+        entity.setId(id);
         install_infoService.save(entity);
         return sendSuccessMessage();
     }
@@ -56,8 +59,8 @@ public class Install_infoController extends BaseCommonController {
 
     private Map<String,Object> buildParameter(Install_info entity){
         Map<String,Object> parameterMap = new HashMap<>();
-        if (StringUtils.isNotBlank(entity.getInstallNumber())){
-            parameterMap.put("installNumber", entity.getInstallNumber());
+        if (StringUtils.isNotBlank(entity.getId())){
+            parameterMap.put("id", entity.getId());
         }
         if (StringUtils.isNotBlank(entity.getDecisionMakerName())){
             parameterMap.put("decisionMakerName", entity.getDecisionMakerName());
@@ -70,4 +73,9 @@ public class Install_infoController extends BaseCommonController {
         install_infoService.deleteById(id);
         return sendSuccessMessage();
     }
+
+    @RequestMapping("/demo")
+    public String demo() {
+        return NumberUtills.getNumber();
+        }
 }

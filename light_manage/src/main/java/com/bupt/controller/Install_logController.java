@@ -5,7 +5,6 @@ import com.bupt.common.base.PageEntity;
 import com.bupt.common.utils.BeanUtills;
 import com.bupt.common.utils.DateUtil;
 import com.bupt.domain.Install_log;
-import com.bupt.domain.Switch;
 import com.bupt.service.Install_logService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

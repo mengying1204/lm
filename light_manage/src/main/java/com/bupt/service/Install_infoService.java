@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -31,8 +32,8 @@ public class Install_infoService extends BasePageService<Install_info,String> {
 
     public void  pageByHql(PageEntity<Install_info> pageEntity, Map<String,Object> paramaMap){
         StringBuilder sql = new StringBuilder(" from Install_info where 1=1 ");
-        if (paramaMap.containsKey("installNumber")){
-            sql.append(" and installNumber =:installNumber ");
+        if (paramaMap.containsKey("id")){
+            sql.append(" and id =:id ");
         }
         if (paramaMap.containsKey("decisionMakerName")){
             sql.append(" and decisionMakerName =:decisionMakerName ");
