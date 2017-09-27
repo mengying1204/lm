@@ -2,7 +2,9 @@ package com.bupt.service;
 
 import com.bupt.common.base.BasePageService;
 import com.bupt.common.base.PageEntity;
+import com.bupt.domain.PurchaseDetail;
 import com.bupt.domain.PurchaseInfo;
+import com.bupt.repository.PurchaseDetailRepository;
 import com.bupt.repository.PurchaseInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,31 +18,29 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class PurchaseInfoService extends BasePageService<PurchaseInfo,String> {
+public class PurchaseDetailService extends BasePageService<PurchaseInfo,String> {
     @Autowired
-    private PurchaseInfoRepository purchaseInfoRepository;
+    private PurchaseDetailRepository purchaseDetailRepository;
 
-    public PurchaseInfo findOne(String id) {
-        return purchaseInfoRepository.findOne(id);
+    public PurchaseDetail findOne(String id) {
+        return purchaseDetailRepository.findOne(id);
     }
 
-    public void save(PurchaseInfo entity) {
-        purchaseInfoRepository.save(entity);
+    public void save(PurchaseDetail entity) {
+        purchaseDetailRepository.save(entity);
     }
 
     public void deleteById(String id) {
-        purchaseInfoRepository.delete(id);
+        purchaseDetailRepository.delete(id);
     }
 
-    public List<PurchaseInfo> findAll() {
-        return purchaseInfoRepository.findAll();
+    public List<PurchaseDetail> findAll() {
+        return purchaseDetailRepository.findAll();
     }
 
-    public void pageByHql(PageEntity<PurchaseInfo> pageEntity, Map<String, Object> paramaMap) {
-        StringBuilder sql = new StringBuilder(" from PurchaseInfo where 1=1 ");
-        if (paramaMap.containsKey("type")) {
-            sql.append(" and type =:type ");
-        }
+    public void pageByHql(PageEntity<PurchaseDetail> pageEntity, Map<String, Object> paramaMap) {
+        StringBuilder sql = new StringBuilder(" from PurchaseDetail where 1=1 ");
+
         super.pageByHql(sql.toString(), pageEntity, paramaMap);
 
     }
