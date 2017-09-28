@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by mengying on 2017/9/21.
  */
 @RestController
-@RequestMapping("/install_log")
+@RequestMapping("/installlog")
 public class Install_logController extends BaseCommonController {
     @Autowired
     private Install_logService install_logService;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,4 +44,5 @@ public class Install_logService extends BasePageService<Install_log,String> {
         super.pageByHql(sql.toString(),pageEntity,paramaMap);
         translate(pageEntity.getResults());
     }
+    public List<Install_log> findAll() {return install_logRepository.findAll();}
 }

@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by mengying on 2017/9/21.
  */
 @RestController
-@RequestMapping("/install_info")
+@RequestMapping("/installinfo")
 public class Install_infoController extends BaseCommonController {
     @Autowired
     private Install_infoService install_infoService;
