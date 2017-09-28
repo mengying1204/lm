@@ -4,9 +4,11 @@ import com.bupt.common.base.BaseCommonController;
 import com.bupt.common.base.PageEntity;
 import com.bupt.common.utils.BeanUtills;
 import com.bupt.common.utils.DateUtil;
+import com.bupt.domain.Commodity;
 import com.bupt.domain.InfoAndDetail;
 import com.bupt.domain.PurchaseDetail;
 import com.bupt.domain.PurchaseInfo;
+import com.bupt.service.CommodityService;
 import com.bupt.service.PurchaseDetailService;
 import com.bupt.service.PurchaseInfoService;
 import com.google.gson.Gson;
@@ -19,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.bupt.common.utils.NumberUtills.getNumber;
+
 /**
  * Created by Stadpole on 2017/9/21.
  */
@@ -27,32 +31,47 @@ import java.util.Map;
 public class PurchaseDetailController extends BaseCommonController {
     @Autowired
     private PurchaseDetailService purchaseDetailService;
-
+    @Autowired
+    private PurchaseInfoService purchaseInfoService;
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String save(@RequestBody String JsonData){
-
+        //urchaseDetailService.PurchaseHandle(JsonData);
+        PurchaseInfo purchaseInfo = new PurchaseInfo();
+        String number = getNumber();
+        double totalcount = 0;
         //GSON直接解析成对象
-        InfoAndDetail resultBean = new Gson().fromJson(JsonData,InfoAndDetail.class);
-        System.out.println(resultBean.getPurchaseManagerNumbert());
+        InfoAndDetail resultBean = new Gson().fromJson(JsonData, InfoAndDetail.class);
+        purchaseInfo.setPurchaseManagerNumber(resultBean.getPurchaseManagerNumber());
+        purchaseInfo.setPurchaseManagerName(resultBean.getPurchaseManagerName());
+        purchaseInfo.setPurchaseNumber(number);
         //对象中拿到集合
         List<InfoAndDetail.PurchaseDetail> userBeanList = resultBean.getArr();
-     for(int i=0;i<userBeanList.size();i++){
-        String id= userBeanList.get(i).getType();
-        System.out.println(id);
-     }
 
+        for (InfoAndDetail.PurchaseDetail infoPurchaseDetail : userBeanList) {
+            double countDetail = infoPurchaseDetail.getCountDetail();
+            totalcount = countDetail + totalcount;
+            PurchaseDetail purchaseDetail = new PurchaseDetail();
+            purchaseDetail.setName(infoPurchaseDetail.getName());
+            purchaseDetail.setPower(infoPurchaseDetail.getPower());
+            purchaseDetail.setPrice(infoPurchaseDetail.getPrice());
+            purchaseDetail.setType(infoPurchaseDetail.getType());
+            purchaseDetail.setCountDetail(countDetail);
+            purchaseDetail.setPurchaseNumber(number);
+            purchaseDetailService.save(purchaseDetail);
+        }
+        purchaseInfo.setTotalCount(totalcount);
+        purchaseInfoService.save(purchaseInfo);
         return sendSuccessMessage();
     }
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public String update(@RequestBody PurchaseDetail entity){
-        if((StringUtils.isNotBlank(entity.getPurchaseNumber()))){
-            PurchaseDetail purchaseDetail = purchaseDetailService.findOne(entity.getPurchaseNumber());
-            BeanUtills.copyProperties(entity, purchaseDetail);
-            purchaseDetailService.save(purchaseDetail);
-            return sendSuccessMessage();
-        }else {
-            return sendFailMessage();
-        }
+       boolean b= purchaseDetailService.updatePurchaseDetail(entity);
+       if(b){
+           return sendSuccessMessage();
+       }
+       else {
+           return sendFailMessage();
+       }
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String findOne(@PathVariable(value="id") String id){
@@ -64,6 +83,7 @@ public class PurchaseDetailController extends BaseCommonController {
         purchaseDetailService.deleteById(id);
         return sendSuccessMessage();
     }
+    //查看商品详情
     @RequestMapping("/page")
     public String page(PurchaseDetail entity, int page, int size) {
         int start=(page-1)*size;
@@ -73,6 +93,9 @@ public class PurchaseDetailController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(PurchaseDetail entity) {
         Map<String, Object> parameterMap = new HashMap<>();
+        if (entity.getPurchaseNumber()!=null){
+            parameterMap.put("purchaseNumber", entity.getPurchaseNumber());
+        }
             return parameterMap;
     }
 }

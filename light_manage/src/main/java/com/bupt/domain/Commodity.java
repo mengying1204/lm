@@ -17,12 +17,12 @@ public class Commodity {
     private String id;
     private Date createTime;
     private Date lastUpdate;
-    private String  commodityNumber;
+   // private String  commodityNumber;
     private String name;
     private Double power;
-    private BigDecimal price;
+    private Double price;
     private String type;
-    private int count;
+    private Double count;
     @Id
     @Column(name = "ID", updatable = false)
     @GeneratedValue(generator = "system-uuid")
@@ -55,7 +55,7 @@ public class Commodity {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
-    @Basic
+   /* @Basic
     @Column(name = "COMMODITY_NUMBER")
     public String getCommodityNumber() {
         return commodityNumber;
@@ -63,7 +63,7 @@ public class Commodity {
 
     public void setCommodityNumber(String commodityNumber) {
         this.commodityNumber = commodityNumber;
-    }
+    }*/
 
     @Basic
     @Column(name = "NAME")
@@ -85,11 +85,11 @@ public class Commodity {
     }
     @Basic
     @Column(name = "PRICE")
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     @Basic
@@ -103,11 +103,12 @@ public class Commodity {
     }
     @Basic
     @Column(name = "COUNT")
-    public int getCount() {
+
+    public Double getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Double count) {
         this.count = count;
     }
 }

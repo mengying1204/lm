@@ -1,17 +1,13 @@
 package com.bupt.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Stadpole on 2017/9/27.
  */
 public class InfoAndDetail {
-    private String  purchaseNumber;
-    private String purchaseManagerNumbert;  //下发采购单人员编号
+    private String purchaseManagerNumber;  //下发采购单人员编号
     private String purchaseManagerName;  //下发采购单人员姓名
-    private Double countInfo;
     private List<PurchaseDetail> arr;
     public class PurchaseDetail{
     private String id;
@@ -19,7 +15,7 @@ public class InfoAndDetail {
     private Double power;
     private Double price;
     private String type;
-    private String countDetail;
+    private Double countDetail;
         public String getId() {
             return id;
         }
@@ -60,28 +56,21 @@ public class InfoAndDetail {
             this.type = type;
         }
 
-        public String getCountDetail() {
+        public Double getCountDetail() {
             return countDetail;
         }
 
-        public void setCountDetail(String countDetail) {
+        public void setCountDetail(Double countDetail) {
             this.countDetail = countDetail;
         }
     }
-    public String getPurchaseNumber() {
-        return purchaseNumber;
+
+    public String getPurchaseManagerNumber() {
+        return purchaseManagerNumber;
     }
 
-    public void setPurchaseNumber(String purchaseNumber) {
-        this.purchaseNumber = purchaseNumber;
-    }
-
-    public String getPurchaseManagerNumbert() {
-        return purchaseManagerNumbert;
-    }
-
-    public void setPurchaseManagerNumbert(String purchaseManagerNumbert) {
-        this.purchaseManagerNumbert = purchaseManagerNumbert;
+    public void setPurchaseManagerNumber(String purchaseManagerNumber) {
+        this.purchaseManagerNumber = purchaseManagerNumber;
     }
 
     public String getPurchaseManagerName() {
@@ -92,13 +81,6 @@ public class InfoAndDetail {
         this.purchaseManagerName = purchaseManagerName;
     }
 
-    public Double getCountInfo() {
-        return countInfo;
-    }
-
-    public void setCountInfo(Double countInfo) {
-        this.countInfo = countInfo;
-    }
 
     public List<PurchaseDetail> getArr() {
         return arr;

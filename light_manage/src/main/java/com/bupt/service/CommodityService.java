@@ -2,8 +2,10 @@ package com.bupt.service;
 
 import com.bupt.common.base.BasePageService;
 import com.bupt.common.base.PageEntity;
+import com.bupt.common.utils.BeanUtills;
 import com.bupt.domain.Commodity;
 import com.bupt.repository.CommodityRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +18,7 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class CommodityService extends BasePageService<Commodity,String> {
+public class CommodityService extends BasePageService<Commodity, String> {
     @Autowired
     private CommodityRepository commodityRepository;
 
@@ -45,5 +47,14 @@ public class CommodityService extends BasePageService<Commodity,String> {
 
     }
 
-
+    public boolean updateCommodity(Commodity entity) {
+        if ((StringUtils.isNotBlank(entity.getId()))) {
+            Commodity commodity = findOne(entity.getId());
+            BeanUtills.copyProperties(entity, commodity);
+            save(commodity);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

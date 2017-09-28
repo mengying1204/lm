@@ -20,8 +20,8 @@ public class Staff {
     private String  staffNumber;
     private String department;
     private String job;
-    private int idNumber;
-    private int phoneNumber;
+    private String idNumber;
+    private String phoneNumber;
     private String address;
     private String staffName;
     private String gender;
@@ -85,22 +85,23 @@ public class Staff {
     public void setJob(String job) {
         this.job = job;
     }
+
     @Basic
     @Column(name = "ID_NUMBER")
-    public int getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
     @Basic
     @Column(name = "PHONE_NUMBER")
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     @Basic

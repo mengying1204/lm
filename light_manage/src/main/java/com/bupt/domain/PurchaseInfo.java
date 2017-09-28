@@ -1,12 +1,10 @@
 package com.bupt.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -18,13 +16,12 @@ public class PurchaseInfo {
     private Date createTime;
     private Date lastUpdate;
     private String  purchaseNumber;
-    private String purchaseManagerNumbert;  //下发采购单人员编号
+    private String purchaseManagerNumber;  //下发采购单人员编号
     private String purchaseManagerName;  //下发采购单人员姓名
-    private String countInfo;
+    private Double totalCount;
+    private Double totalPrice;
     @Id
     @Column(name = "PURCHASE_NUMBER", updatable = false)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     public String getPurchaseNumber() {
         return purchaseNumber;
     }
@@ -56,17 +53,14 @@ public class PurchaseInfo {
     }
     @Basic
     @Column(name = "PURCHASE_M_NUMBER")
-    public String getPurchaseManagerNumbert() {
-        return purchaseManagerNumbert;
+    public String getPurchaseManagerNumber() {
+        return purchaseManagerNumber;
     }
 
-    public void setPurchaseManagerNumbert(String purchaseManagerNumbert) {
-        int r1=(int)(Math.random()*(10));//产生2个0-9的随机数
-        int r2=(int)(Math.random()*(10));
-        long now = System.currentTimeMillis();//一个13位的时间戳
-        purchaseManagerNumbert =String.valueOf(r1)+String.valueOf(r2)+String.valueOf(now);
-        this.purchaseManagerNumbert = purchaseManagerNumbert;
+    public void setPurchaseManagerNumber(String purchaseManagerNumber) {
+        this.purchaseManagerNumber = purchaseManagerNumber;
     }
+
     @Basic
     @Column(name = "PURCHASE_M_NAME")
     public String getPurchaseManagerName() {
@@ -76,14 +70,25 @@ public class PurchaseInfo {
     public void setPurchaseManagerName(String purchaseManagerName) {
         this.purchaseManagerName = purchaseManagerName;
     }
+
+
     @Basic
     @Column(name = "COUNT_INFO")
-
-    public String getCountInfo() {
-        return countInfo;
+    public Double getTotalCount() {
+        return totalCount;
     }
 
-    public void setCountInfo(String countInfo) {
-        this.countInfo = countInfo;
+    public void setTotalCount(Double totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    @Transient
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

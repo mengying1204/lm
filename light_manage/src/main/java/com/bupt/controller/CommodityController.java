@@ -29,14 +29,9 @@ public class CommodityController extends BaseCommonController {
     }
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public String update(@RequestBody Commodity entity){
-        if((StringUtils.isNotBlank(entity.getId()))){
-            Commodity commodity=commodityService.findOne(entity.getId());
-            BeanUtills.copyProperties(entity, commodity);
-            commodityService.save(commodity);
-            return sendSuccessMessage();
-        }else {
-            return sendFailMessage();
-        }
+        boolean b=commodityService.updateCommodity(entity);
+        if(b){return sendSuccessMessage();}
+        else {return  sendFailMessage();}
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String findOne(@PathVariable(value="id") String id){

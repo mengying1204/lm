@@ -2,6 +2,8 @@ package com.bupt.service;
 
 import com.bupt.common.base.BasePageService;
 import com.bupt.common.base.PageEntity;
+import com.bupt.domain.Commodity;
+import com.bupt.domain.PurchaseDetail;
 import com.bupt.domain.PurchaseInfo;
 import com.bupt.domain.PurchaseLog;
 import com.bupt.repository.PurchaseInfoRepository;
@@ -18,9 +20,13 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class PurchaseLogService extends BasePageService<PurchaseLog,String> {
+public class PurchaseLogService extends BasePageService<PurchaseLog, String> {
     @Autowired
     private PurchaseLogRepository purchaseLogRepository;
+    @Autowired
+    private PurchaseDetailService purchaseDetailService;
+    @Autowired
+    private CommodityService commodityService;
 
     public PurchaseLog findOne(String id) {
         return purchaseLogRepository.findOne(id);
@@ -47,5 +53,30 @@ public class PurchaseLogService extends BasePageService<PurchaseLog,String> {
 
     }
 
+    public void logHandle(PurchaseLog entity) {
+        List<PurchaseDetail> purchaseDetails = purchaseDetailService.findByPurchaseNumber(entity.getPurchaseNumber());
+        if (purchaseDetails != null) {
+            List<Commodity> commodities = commodityService.findAll();
+            for (PurchaseDetail purchaseDetail : purchaseDetails) {
+                boolean b = false;
+                for (Commodity commodity : commodities) {
+                    if (purchaseDetail.getName().equals(commodity.getName())) {
+                        double count = commodity.getCount();
+                        commodity.setCount(count + purchaseDetail.getCountDetail());
+                        b=true;
+                    }
+                }
+                if(b==false){
+                    Commodity commodity=new Commodity();
+                    commodity.setName(purchaseDetail.getName());
+                    commodity.setCount(purchaseDetail.getCountDetail());
+                    commodity.setPower(purchaseDetail.getPower());
+                    commodity.setType(purchaseDetail.getType());
+                    commodity.setPrice(purchaseDetail.getPrice());
+                    commodityService.save(commodity);
+                }
+            }
+        }
+    }
 
 }
