@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,5 +79,10 @@ public class LightController extends BaseCommonController {
     public String delete(@PathVariable ("id") String id) {
         lightService.deleteById(id);
         return sendSuccessMessage();
+    }
+    @RequestMapping("/find")
+    public String findAll() {
+        List<Light> lights = lightService.findAll();
+        return sendSuccessMessage(lights);
     }
 }

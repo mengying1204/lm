@@ -5,8 +5,10 @@ import com.bupt.common.base.PageEntity;
 import com.bupt.common.utils.BeanUtills;
 import com.bupt.common.utils.DateUtil;
 import com.bupt.common.utils.NumberUtills;
+import com.bupt.domain.InstallInfoAndDetail;
 import com.bupt.domain.Install_info;
 import com.bupt.service.Install_infoService;
+import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +20,19 @@ import java.util.Map;
  * Created by mengying on 2017/9/21.
  */
 @RestController
-@RequestMapping("/install_info")
+@RequestMapping("/installinfo")
 public class Install_infoController extends BaseCommonController {
+
     @Autowired
     private Install_infoService install_infoService;
 
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public String save(@RequestBody Install_info entity) {
-        String id = NumberUtills.getNumber();
-        entity.setId(id);
-        install_infoService.save(entity);
+    public String save(@RequestBody String JsonData) {
+        //GSON直接解析成对象
+        InstallInfoAndDetail resultBean = new Gson().fromJson(JsonData, InstallInfoAndDetail.class);
+        install_infoService.saveInfoAndDetail(resultBean);
         return sendSuccessMessage();
     }
-
     @RequestMapping(value = "",method = RequestMethod.PUT)
     public String update(@RequestBody Install_info entity) {
         if (StringUtils.isNotBlank(entity.getId())){
@@ -78,4 +80,6 @@ public class Install_infoController extends BaseCommonController {
     public String demo() {
         return NumberUtills.getNumber();
         }
+
+
 }

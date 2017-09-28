@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,4 +50,6 @@ public class LightService extends BasePageService<Light,String> {
         super.pageByHql(sql.toString(),pageEntity,paramaMap);
         translate(pageEntity.getResults());
     }
+
+    public List<Light> findAll() {return lightRepository.findAll();}
 }
