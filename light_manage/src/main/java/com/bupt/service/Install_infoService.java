@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,4 +41,5 @@ public class Install_infoService extends BasePageService<Install_info,String> {
         super.pageByHql(sql.toString(),pageEntity,paramaMap);
         translate(pageEntity.getResults());
     }
+    public List<Install_info> findAll() {return install_infoRepository.findAll();}
 }

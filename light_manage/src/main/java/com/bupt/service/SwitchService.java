@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,5 +45,5 @@ public class SwitchService extends BasePageService<Switch,String> {
         translate(pageEntity.getResults());
     }
 
-
+    public List<Switch> findAll() {return switchRepository.findAll();}
 }
