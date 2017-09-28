@@ -36,7 +36,8 @@ public class WebConfig extends RepositoryRestConfigurerAdapter {
             if (!"OPTIONS".equals(request.getMethod())) {
                 chain.doFilter(req, res);
             } else {
-            }
+
+          }
         }
 
         public void init(FilterConfig filterConfig) {}

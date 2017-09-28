@@ -16,29 +16,20 @@ public class MaintainInfo extends BaseUuidEntity {
     LIGHT_ADDRESS	varchar	64	0	-1	0	0	0	0		0		utf8	utf8_general_ci		0	0
     MONITOR_NUMBER	varchar	36	0	-1	0	0	0	0		0		utf8	utf8_general_ci		0	0
     MONITOR_NAME	varchar	32	0	-1	0	0	0	0		0		utf8	utf8_general_ci		0	0*/
-    private String lightId;
     private String lightAddress;
-    private String monitorName;
-    private String monitorNumber;
-    private String maintainNumber;
 
+/*    @ManyToOne
+    //@JoinColumn(name = "maintain_number")
+    MaintainOrder maintainOrder;*/
+
+    String maintainNumber;
     public MaintainInfo(){}
 
     public MaintainInfo(MaintainInfo maintainInfo) {
         this.id=maintainInfo.getId();
-        this.lightId = maintainInfo.getLightId();
         this.lightAddress = maintainInfo.getLightAddress();
-        this.monitorName =maintainInfo.getMonitorName();
-        this.monitorNumber =maintainInfo.getMonitorNumber();
-        this.maintainNumber =maintainInfo.getMaintainNumber();
-    }
-
-    public String getLightId() {
-        return lightId;
-    }
-
-    public void setLightId(String lightId) {
-        this.lightId = lightId;
+      //  this.maintainOrder =maintainInfo.getMaintainOrder();
+        this.maintainNumber=maintainInfo.getMaintainNumber();
     }
 
     public String getLightAddress() {
@@ -49,22 +40,6 @@ public class MaintainInfo extends BaseUuidEntity {
         this.lightAddress = lightAddress;
     }
 
-    public String getMonitorName() {
-        return monitorName;
-    }
-
-    public void setMonitorName(String monitorName) {
-        this.monitorName = monitorName;
-    }
-
-    public String getMonitorNumber() {
-        return monitorNumber;
-    }
-
-    public void setMonitorNumber(String monitorNumber) {
-        this.monitorNumber = monitorNumber;
-    }
-
     public String getMaintainNumber() {
         return maintainNumber;
     }
@@ -72,4 +47,11 @@ public class MaintainInfo extends BaseUuidEntity {
     public void setMaintainNumber(String maintainNumber) {
         this.maintainNumber = maintainNumber;
     }
+    /*public MaintainOrder getMaintainOrder() {
+        return maintainOrder;
+    }
+
+    public void setMaintainOrder(MaintainOrder maintainOrder) {
+        this.maintainOrder = maintainOrder;
+    }*/
 }
