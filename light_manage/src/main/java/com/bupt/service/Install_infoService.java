@@ -3,6 +3,7 @@ package com.bupt.service;
 import com.bupt.common.base.BasePageService;
 import com.bupt.common.base.PageEntity;
 import com.bupt.common.utils.NumberUtills;
+import com.bupt.domain.Commodity;
 import com.bupt.domain.InstallInfoAndDetail;
 import com.bupt.domain.Install_detail;
 import com.bupt.domain.Install_info;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class Install_infoService extends BasePageService<Install_info,String> {
+public class Install_infoService extends BasePageService<Install_info, String> {
 
     @Autowired
     private Install_infoRepository install_infoRepository;
@@ -28,26 +29,33 @@ public class Install_infoService extends BasePageService<Install_info,String> {
     @Autowired
     private CommodityService commodityService;
 
-    public void save(Install_info entity){ install_infoRepository.save(entity); }
+    public void save(Install_info entity) {
+        install_infoRepository.save(entity);
+    }
 
-    public Install_info findById(String id){
+    public Install_info findById(String id) {
         return install_infoRepository.findOne(id);
     }
 
-    public void deleteById(String id){ install_infoRepository.delete(id); }
+    public void deleteById(String id) {
+        install_infoRepository.delete(id);
+    }
 
-    public void  pageByHql(PageEntity<Install_info> pageEntity, Map<String,Object> paramaMap){
+    public void pageByHql(PageEntity<Install_info> pageEntity, Map<String, Object> paramaMap) {
         StringBuilder sql = new StringBuilder(" from Install_info where 1=1 ");
-        if (paramaMap.containsKey("id")){
+        if (paramaMap.containsKey("id")) {
             sql.append(" and id =:id ");
         }
-        if (paramaMap.containsKey("decisionMakerName")){
+        if (paramaMap.containsKey("decisionMakerName")) {
             sql.append(" and decisionMakerName =:decisionMakerName ");
         }
-        super.pageByHql(sql.toString(),pageEntity,paramaMap);
+        super.pageByHql(sql.toString(), pageEntity, paramaMap);
         translate(pageEntity.getResults());
     }
-    public List<Install_info> findAll() {return install_infoRepository.findAll();}
+
+    public List<Install_info> findAll() {
+        return install_infoRepository.findAll();
+    }
 
     public void saveInfoAndDetail(InstallInfoAndDetail entity) {
         Install_info install_info = new Install_info();
@@ -58,9 +66,9 @@ public class Install_infoService extends BasePageService<Install_info,String> {
         save(install_info);
         //对象中拿到集合
         List<InstallInfoAndDetail.Install_detail> detailBeanList = entity.getArr();
-        for(int i=0;i< detailBeanList.size();i++){
+        for (int i = 0; i < detailBeanList.size(); i++) {
             Install_detail install_detail = new Install_detail();
-            InstallInfoAndDetail.Install_detail detailBean= detailBeanList.get(i);
+            InstallInfoAndDetail.Install_detail detailBean = detailBeanList.get(i);
             install_detail.setInstallNumber(id);
             install_detail.setGoodsNumber(detailBean.getGoodsNumber());
             install_detail.setGoodsName(detailBean.getGoodsName());
@@ -68,6 +76,10 @@ public class Install_infoService extends BasePageService<Install_info,String> {
             install_detail.setSwitchNumber(detailBean.getSwitchNumber());
             install_detail.setType(detailBean.getType());
             install_detailService.save(install_detail);
+            Commodity commodity = commodityService.findByName(detailBean.getGoodsName());
+            double installCount = commodity.getCount();
+            commodity.setCount(installCount - 1);
+
         }
     }
 }

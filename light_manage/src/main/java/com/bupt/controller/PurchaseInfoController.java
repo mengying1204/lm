@@ -58,6 +58,12 @@ public class PurchaseInfoController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(PurchaseInfo entity) {
         Map<String, Object> parameterMap = new HashMap<>();
+        if (StringUtils.isNotBlank(entity.getPurchaseManagerName())){
+            parameterMap.put("purchaseManagerName", entity.getPurchaseManagerName());
+        }
+        if (entity.getPurchaseManagerNumber()!=null){
+            parameterMap.put("purchaseManagerNumber", entity.getPurchaseManagerNumber());
+        }
             return parameterMap;
     }
 }

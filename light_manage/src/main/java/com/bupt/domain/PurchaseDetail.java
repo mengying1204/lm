@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name="purchase_detail")
 public class PurchaseDetail {
     private String id;
-    private String  purchaseNumber;
+    private String purchaseNumber;
     private String name;
     private Double power;
     private Double price;

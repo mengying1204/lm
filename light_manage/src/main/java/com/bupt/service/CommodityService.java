@@ -38,6 +38,7 @@ public class CommodityService extends BasePageService<Commodity, String> {
         return commodityRepository.findAll();
     }
 
+    public Commodity findByName(String name){return commodityRepository.findByName(name);}
     public void pageByHql(PageEntity<Commodity> pageEntity, Map<String, Object> paramaMap) {
         StringBuilder sql = new StringBuilder(" from Commodity where 1=1 ");
         if (paramaMap.containsKey("type")) {

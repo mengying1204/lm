@@ -63,11 +63,11 @@ public class PurchaseLogService extends BasePageService<PurchaseLog, String> {
                     if (purchaseDetail.getName().equals(commodity.getName())) {
                         double count = commodity.getCount();
                         commodity.setCount(count + purchaseDetail.getCountDetail());
-                        b=true;
+                        b = true;
                     }
                 }
-                if(b==false){
-                    Commodity commodity=new Commodity();
+                if (b == false) {
+                    Commodity commodity = new Commodity();
                     commodity.setName(purchaseDetail.getName());
                     commodity.setCount(purchaseDetail.getCountDetail());
                     commodity.setPower(purchaseDetail.getPower());
