@@ -16,42 +16,43 @@ public class MaintainInfo extends BaseUuidEntity {
     LIGHT_ADDRESS	varchar	64	0	-1	0	0	0	0		0		utf8	utf8_general_ci		0	0
     MONITOR_NUMBER	varchar	36	0	-1	0	0	0	0		0		utf8	utf8_general_ci		0	0
     MONITOR_NAME	varchar	32	0	-1	0	0	0	0		0		utf8	utf8_general_ci		0	0*/
-    private String lightAddress;
+    private String type;
 
-/*    @ManyToOne
-    //@JoinColumn(name = "maintain_number")
-    MaintainOrder maintainOrder;*/
+    private String lightId;
 
-    String maintainNumber;
+    public String getLightId() {
+        return lightId;
+    }
+
+    public void setLightId(String lightId) {
+        this.lightId = lightId;
+    }
+
+    private String maintainNumber;
+
     public MaintainInfo(){}
 
     public MaintainInfo(MaintainInfo maintainInfo) {
         this.id=maintainInfo.getId();
-        this.lightAddress = maintainInfo.getLightAddress();
-      //  this.maintainOrder =maintainInfo.getMaintainOrder();
+        this.type = maintainInfo.getType();
         this.maintainNumber=maintainInfo.getMaintainNumber();
+        this.lightId=maintainInfo.getLightId();
     }
 
-    public String getLightAddress() {
-        return lightAddress;
+    public String getType() {
+        return type;
     }
 
-    public void setLightAddress(String lightAddress) {
-        this.lightAddress = lightAddress;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getMaintainNumber() {
         return maintainNumber;
     }
 
-    public void setMaintainNumber(String maintainNumber) {
+   public void setMaintainNumber(String maintainNumber) {
         this.maintainNumber = maintainNumber;
     }
-    /*public MaintainOrder getMaintainOrder() {
-        return maintainOrder;
-    }
 
-    public void setMaintainOrder(MaintainOrder maintainOrder) {
-        this.maintainOrder = maintainOrder;
-    }*/
 }

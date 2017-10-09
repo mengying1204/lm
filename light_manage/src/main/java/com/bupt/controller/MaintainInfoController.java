@@ -1,10 +1,13 @@
 package com.bupt.controller;
 
+import com.bupt.domain.Light;
 import com.bupt.domain.MaintainInfo;
 import com.bupt.service.MaintainInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.bupt.common.utils.MessageUtil.sendFailMessage;
 import static com.bupt.common.utils.MessageUtil.sendSuccessMessage;
@@ -40,4 +43,15 @@ public class MaintainInfoController {
             return sendFailMessage();
         }
     }
+    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    public String test(@RequestBody String string) {
+        System.out.println(string);
+        return sendSuccessMessage();
+    }
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable(value = "id") String id) {
+        List<Light> lights=maintainInfoService.detail(id);
+        return sendSuccessMessage(lights);
+    }
+
 }

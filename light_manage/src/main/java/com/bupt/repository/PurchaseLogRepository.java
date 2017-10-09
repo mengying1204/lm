@@ -1,6 +1,5 @@
 package com.bupt.repository;
 
-import com.bupt.domain.PurchaseInfo;
 import com.bupt.domain.PurchaseLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 

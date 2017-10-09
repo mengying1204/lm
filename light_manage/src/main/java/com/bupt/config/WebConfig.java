@@ -17,8 +17,11 @@ import java.io.IOException;
 @Configuration
 public class WebConfig extends RepositoryRestConfigurerAdapter {
 
-
     /**
+     * export Id for Equipment class
+     * @param config
+     */
+ /**
      *  todo
      * to permit csrf , but it will move to api gateway in the future
      */
@@ -36,8 +39,7 @@ public class WebConfig extends RepositoryRestConfigurerAdapter {
             if (!"OPTIONS".equals(request.getMethod())) {
                 chain.doFilter(req, res);
             } else {
-
-          }
+            }
         }
 
         public void init(FilterConfig filterConfig) {}
