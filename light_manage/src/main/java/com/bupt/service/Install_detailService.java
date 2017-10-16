@@ -27,6 +27,9 @@ public class Install_detailService extends BasePageService<Install_detail,String
     public Install_detail findById(String id){
         return install_detailRepository.findOne(id);
     }
+    public List<Install_detail> findByInstallNumber(String installNumber){
+        return install_detailRepository.findByInstallNumber(installNumber);
+    }
 
     public void deleteById(String id){ install_detailRepository.delete(id); }
 

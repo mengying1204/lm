@@ -16,6 +16,7 @@ public class Install_detail {
     private String goodsName;
     private String location;
     private String switchNumber;
+    private String type;
 
     @Id
     @Column(name = "ID", updatable = false)
@@ -69,4 +70,9 @@ public class Install_detail {
     public void setSwitchNumber(String switchNumber) {
         this.switchNumber = switchNumber;
     }
+
+    @Column(name = "TYPE")
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 }

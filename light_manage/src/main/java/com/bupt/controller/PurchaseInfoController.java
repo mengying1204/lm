@@ -48,6 +48,7 @@ public class PurchaseInfoController extends BaseCommonController {
         purchaseInfoService.deleteById(id);
         return sendSuccessMessage();
     }
+    //查询采购单，里面有总价和总数量
     @RequestMapping("/page")
     public String page(PurchaseInfo entity, int page, int size) {
         int start=(page-1)*size;
@@ -57,6 +58,12 @@ public class PurchaseInfoController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(PurchaseInfo entity) {
         Map<String, Object> parameterMap = new HashMap<>();
+        if (StringUtils.isNotBlank(entity.getPurchaseManagerName())){
+            parameterMap.put("purchaseManagerName", entity.getPurchaseManagerName());
+        }
+        if (entity.getPurchaseManagerNumber()!=null){
+            parameterMap.put("purchaseManagerNumber", entity.getPurchaseManagerNumber());
+        }
             return parameterMap;
     }
 }

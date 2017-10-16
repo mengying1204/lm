@@ -4,8 +4,11 @@ import com.bupt.common.base.BaseCommonController;
 import com.bupt.common.base.PageEntity;
 import com.bupt.common.utils.BeanUtills;
 import com.bupt.common.utils.DateUtil;
+import com.bupt.domain.Commodity;
+import com.bupt.domain.PurchaseDetail;
 import com.bupt.domain.PurchaseInfo;
 import com.bupt.domain.PurchaseLog;
+import com.bupt.service.PurchaseDetailService;
 import com.bupt.service.PurchaseInfoService;
 import com.bupt.service.PurchaseLogService;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +30,7 @@ public class PurchaseLogController extends BaseCommonController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String save(@RequestBody PurchaseLog entity){
+        purchaseLogService.logHandle(entity);
         purchaseLogService.save(entity);
         return sendSuccessMessage();
     }
@@ -59,8 +64,14 @@ public class PurchaseLogController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(PurchaseLog entity) {
         Map<String, Object> parameterMap = new HashMap<>();
-        if (entity.getId()!=null){
+        if (StringUtils.isNotEmpty(entity.getBuyerName())){
             parameterMap.put("buyerName", entity.getBuyerName());
+        }
+        if (entity.getBuyerNumber()!=null){
+            parameterMap.put("buyerNumber", entity.getBuyerNumber());
+        }
+        if (entity.getPurchaseNumber()!=null){
+            parameterMap.put("purchaseNumber", entity.getPurchaseNumber());
         }
         return parameterMap;
     }

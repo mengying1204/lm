@@ -17,6 +17,7 @@ public class Switch {
     private String switchNumber;
     private String switchName;
     private String location;
+    private String state;
     private String voltage;
     private String electricity;
     private Date createTime;
@@ -99,5 +100,14 @@ public class Switch {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @Column(name = "STATE")
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
