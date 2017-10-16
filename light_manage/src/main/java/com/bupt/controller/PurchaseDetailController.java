@@ -93,7 +93,7 @@ public class PurchaseDetailController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(PurchaseDetail entity) {
         Map<String, Object> parameterMap = new HashMap<>();
-        if (entity.getPurchaseNumber()!=null){
+        if (StringUtils.isNotBlank(entity.getPurchaseNumber())){
             parameterMap.put("purchaseNumber", entity.getPurchaseNumber());
         }
             return parameterMap;

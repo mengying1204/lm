@@ -49,6 +49,18 @@ public class PurchaseLogService extends BasePageService<PurchaseLog, String> {
         if (paramaMap.containsKey("buyerName")) {
             sql.append(" and buyerName =:buyerName ");
         }
+        if (paramaMap.containsKey("buyerNumber")) {
+            sql.append(" and buyerNumber =:buyerNumber ");
+        }
+        if (paramaMap.containsKey("purchaseNumber")) {
+            sql.append(" and purchaseNumber =:purchaseNumber ");
+        }
+        if (paramaMap.containsKey("recorderName")) {
+            sql.append(" and recorderName =:recorderName ");
+        }
+        if (paramaMap.containsKey("recorderNumber")) {
+            sql.append(" and recorderNumber =:recorderNumber ");
+        }
         super.pageByHql(sql.toString(), pageEntity, paramaMap);
 
     }

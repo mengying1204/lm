@@ -42,6 +42,9 @@ public class PurchaseInfoService extends BasePageService<PurchaseInfo,String> {
 
     public void pageByHql(PageEntity<PurchaseInfo> pageEntity, Map<String, Object> paramaMap) {
         StringBuilder sql = new StringBuilder(" from PurchaseInfo where 1=1 ");
+        if (paramaMap.containsKey("purchaseNumber")) {
+            sql.append(" and purchaseNumber =:purchaseNumber ");
+        }
         if (paramaMap.containsKey("purchaseManagerName")) {
             sql.append(" and purchaseManagerName =:purchaseManagerName ");
         }

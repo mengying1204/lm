@@ -64,14 +64,20 @@ public class PurchaseLogController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(PurchaseLog entity) {
         Map<String, Object> parameterMap = new HashMap<>();
-        if (StringUtils.isNotEmpty(entity.getBuyerName())){
+        if (StringUtils.isNotBlank(entity.getBuyerName())){
             parameterMap.put("buyerName", entity.getBuyerName());
         }
-        if (entity.getBuyerNumber()!=null){
+        if (StringUtils.isNotBlank(entity.getBuyerNumber())){
             parameterMap.put("buyerNumber", entity.getBuyerNumber());
         }
-        if (entity.getPurchaseNumber()!=null){
+        if (StringUtils.isNotBlank(entity.getPurchaseNumber())){
             parameterMap.put("purchaseNumber", entity.getPurchaseNumber());
+        }
+        if (StringUtils.isNotBlank(entity.getRecorderName())){
+            parameterMap.put("recorderName", entity.getRecorderName());
+        }
+        if (StringUtils.isNotBlank(entity.getRecorderNumber())){
+            parameterMap.put("recorderNumber", entity.getRecorderNumber());
         }
         return parameterMap;
     }

@@ -44,6 +44,15 @@ public class CommodityService extends BasePageService<Commodity, String> {
         if (paramaMap.containsKey("type")) {
             sql.append(" and type =:type ");
         }
+        if (paramaMap.containsKey("name")) {
+            sql.append(" and name =:name ");
+        }
+        if (paramaMap.containsKey("power")) {
+            sql.append(" and power =:power ");
+        }if (paramaMap.containsKey("price")) {
+            sql.append(" and price =:price ");
+        }
+
         super.pageByHql(sql.toString(), pageEntity, paramaMap);
 
     }
