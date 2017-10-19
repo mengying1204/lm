@@ -29,6 +29,9 @@ public class BaseCommonController {
 	public  String sendFailMessage() {
 		return sendMessage("false", "FAILED", null);
 	}
+	public  String FailMessage() {
+		return sendMessage("false", "溢出", null);
+	}
 	public  String sendFailMessage(Object data) {
 		return sendMessage("false", "FAILED", data);
 	}

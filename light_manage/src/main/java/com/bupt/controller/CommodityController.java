@@ -52,7 +52,7 @@ public class CommodityController extends BaseCommonController {
     }
     private Map<String, Object> buildParameter(Commodity entity) {
         Map<String, Object> parameterMap = new HashMap<>();
-        if (StringUtils.isNotEmpty(entity.getType())){
+        if (entity.getType()!=null){
             parameterMap.put("type", entity.getType());
         }
         if (StringUtils.isNotEmpty(entity.getName())){
