@@ -19,8 +19,10 @@ public class PurchaseDetail {
     private String name;
     private Double power;
     private Double price;
-    private String type;
+    private Integer type;
     private Double countDetail;
+
+    private String typeName;
     @Id
     @Column(name = "ID", updatable = false)
     @GeneratedValue(generator = "system-uuid")
@@ -70,15 +72,14 @@ public class PurchaseDetail {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-
     @Basic
     @Column(name = "TYPE")
-    public String getType() {
+
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -91,5 +92,13 @@ public class PurchaseDetail {
 
     public void setCountDetail(Double countDetail) {
         this.countDetail = countDetail;
+    }
+    @Transient
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

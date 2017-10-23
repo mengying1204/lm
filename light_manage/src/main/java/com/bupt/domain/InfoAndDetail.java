@@ -14,7 +14,7 @@ public class InfoAndDetail {
     private String name;
     private Double power;
     private Double price;
-    private String type;
+    private Integer type;
     private Double countDetail;
         public String getId() {
             return id;
@@ -48,11 +48,11 @@ public class InfoAndDetail {
             this.price = price;
         }
 
-        public String getType() {
+        public Integer getType() {
             return type;
         }
 
-        public void setType(String type) {
+        public void setType(Integer type) {
             this.type = type;
         }
 

@@ -2,6 +2,7 @@ package com.bupt.service;
 
 import com.bupt.common.base.BasePageService;
 import com.bupt.common.base.PageEntity;
+import com.bupt.common.enums.CommodityTypeEnum;
 import com.bupt.common.utils.BeanUtills;
 import com.bupt.domain.InfoAndDetail;
 import com.bupt.domain.PurchaseDetail;
@@ -24,7 +25,7 @@ import static com.bupt.common.utils.NumberUtills.getNumber;
  */
 @Service
 @Transactional
-public class PurchaseDetailService extends BasePageService<PurchaseInfo, String> {
+public class PurchaseDetailService extends BasePageService<PurchaseDetail, String> {
     @Autowired
     private PurchaseDetailRepository purchaseDetailRepository;
 
@@ -55,8 +56,19 @@ public class PurchaseDetailService extends BasePageService<PurchaseInfo, String>
             sql.append(" and purchaseNumber =:purchaseNumber ");
         }
         super.pageByHql(sql.toString(), pageEntity, paramaMap);
-
+        translate(pageEntity.getResults());
     }
+    @Override
+    protected void translate(List<PurchaseDetail> list) {
+        super.translate(list);
+        for (PurchaseDetail purchaseDetail : list) {
+            if (purchaseDetail.getType() != null) {
+                String typeName = CommodityTypeEnum.findByValue(purchaseDetail.getType());
+                purchaseDetail.setTypeName(typeName);
+            }
+        }
+    }
+
     public boolean updatePurchaseDetail(PurchaseDetail entity){
         if(StringUtils.isNotBlank(entity.getId())){
             PurchaseDetail purchaseDetail = findOne(entity.getId());
@@ -67,8 +79,4 @@ public class PurchaseDetailService extends BasePageService<PurchaseInfo, String>
             return false;
         }
     }
-
-    /*public void PurchaseHandle(String JsonData) {
-
-    }*/
 }
