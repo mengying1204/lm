@@ -1,6 +1,7 @@
 package com.bupt.common.utils;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by mengying on 2017/9/26.
@@ -26,6 +27,15 @@ public class NumberUtills {
         return time;
     }
 
+    public static String state(){
+        Random random=new Random();
+        double ran=random.nextDouble();
+        if(ran<0.7){
+            return 0+"";
+        }else if(ran<0.95){
+            return 1+"";
+        }else return 2+"";
+    }
 
 
 

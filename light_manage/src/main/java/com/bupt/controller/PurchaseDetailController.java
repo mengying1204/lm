@@ -6,15 +6,12 @@ import com.bupt.common.utils.BeanUtills;
 import com.bupt.common.utils.DateUtil;
 import com.bupt.domain.InfoAndDetail;
 import com.bupt.domain.PurchaseDetail;
-import com.bupt.domain.PurchaseInfo;
 import com.bupt.service.PurchaseDetailService;
-import com.bupt.service.PurchaseInfoService;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +30,11 @@ public class PurchaseDetailController extends BaseCommonController {
 
         //GSON直接解析成对象
         InfoAndDetail resultBean = new Gson().fromJson(JsonData,InfoAndDetail.class);
-        System.out.println(resultBean.getPurchaseManagerNumbert());
+        System.out.println(resultBean.getPurchaseManagerNumber());
         //对象中拿到集合
         List<InfoAndDetail.PurchaseDetail> userBeanList = resultBean.getArr();
      for(int i=0;i<userBeanList.size();i++){
-        String id= userBeanList.get(i).getType();
+        int id= userBeanList.get(i).getType();
         System.out.println(id);
      }
 
